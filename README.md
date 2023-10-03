@@ -308,7 +308,7 @@ print('Decrypted: ', decrypted)
  -	b – kích thước theo bit của một khối (block)
  -	IV - Vector khởi tạo (Initialization Vector)
  -	K - Khóa mã
-___
 > Nguồn tham khảo
  - [Advanced Encryption Standard (AES)](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard)
  - [Block cipher mode of operation](https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation)
+____
