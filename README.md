@@ -309,4 +309,6 @@ print('Decrypted: ', decrypted)
  -	IV - Vector khởi tạo (Initialization Vector)
  -	K - Khóa mã
 ___
-- Tham khảo thêm tại: [Advanced Encryption Standard (AES)](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard) & [Block cipher mode of operation](https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation)
+> Nguồn tham khảo
+ - [Advanced Encryption Standard (AES)](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard)
+ - [Block cipher mode of operation](https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation)
