@@ -60,7 +60,6 @@ decrypt = decrypt_ecb(ciphertext)
 print("Decrypt", decrypt)
 
 ```
-___
 # 2. Cipher block chaining (CBC)
  - AES CBC (Advanced Encryption Standard Cipher Block Chaining) là một chế độ hoạt động của thuật toán mã hóa AES (Advanced Encryption Standard). Đây là một trong những chế độ mã hóa phổ biến và được sử dụng rộng rãi trong các hệ thống bảo mật. Là chế độ mã hóa chuỗi, kết quả mã hóa của khối dữ liệu trước (ciphertext) sẽ được tổ hợp với khối dữ liệu kế tiếp (plaintext) trước khi thực thi mã hóa. 
  - Mã hóa CBC:
@@ -118,7 +117,6 @@ print("Ciphertext (hex):", ciphertext.hex())
 decrypt = decrypt_cbc(ciphertext)
 print("Decrypt", decrypt)
 ```
-___
 # 3. Propagating CBC (PCBC)
  - AES PCBC (Advanced Encryption Standard Propagating Cipher Block Chaining) là một chế độ hoạt động khác của thuật toán mã hóa AES (Advanced Encryption Standard). PCBC là một biến thể của chế độ CBC và thêm vào một bước thay đổi (propagation) để tăng tính ngẫu nhiên và đảm bảo tính toàn vẹn của dữ liệu.
 
@@ -129,7 +127,7 @@ ___
 ```python3
 ```
 
-___
+
 # 4. Cipher feedback (CFB)
  - AES CFB (Advanced Encryption Standard Cipher Feedback) là một chế độ hoạt động của thuật toán mã hóa AES (Advanced Encryption Standard). Đây là chế độ mã hóa mà ciphertext của lần mã hóa hiện tại sẽ được phản hồi (feedback) đến đầu vào của lần mã hóa tiếp theo. Nghĩa là, ciphertext của lần mã hóa hiện tại sẽ được sử dụng để tính toán ciphertext của lần mã hóa kế tiếp. Mô tả có vẻ giống CBC nhưng quá trình trực hiện lại khác.
  - Mã hóa CFB:
@@ -184,7 +182,7 @@ decrypt = decrypt_cfb(ciphertext)
 print("Decrypt", decrypt)
 ```
 
-___
+
 # 5. Output feedback (OFB)
  - AES OFB (Advanced Encryption Standard Output Feedback) là một chế độ hoạt động của thuật toán mã hóa AES (Advanced Encryption Standard). Là một thuật toán mã hóa đối xứng được sử dụng rộng rãi để bảo vệ thông tin. Đây là chế độ mã hóa mà giá trị ngõ ra của khối thực thi thuật toán mã hóa, không phải ciphertext, của lần mã hóa hiện tại sẽ được phản hồi (feedback) đến ngõ vào của lần mã hóa kế tiếp.
  - Mã hóa OFB:
@@ -252,7 +250,6 @@ print("Decrypt", decrypt)
 
 ```
 
-___
 # 6. Counter(CTR)
  - AES-CTR (Advanced Encryption Standard - Counter Mode) là một chế độ hoạt động của thuật toán AES (Advanced Encryption Standard) được sử dụng để mã hóa thông tin. Đây là chế độ mã hóa sử dụng một tập các khối ngõ vào, gọi là các counter, để sinh ra một tập các giá trị ngõ ra thông qua một thuật toán mã hóa. Sau đó, giá trị ngõ ra sẽ được XOR với plaintext để tạo ra ciphertext trong quá trình mã hóa, hoặc XOR với ciphertext để tạo ra plaintext trong quá trình giải mã.
  - Mã hóa CTR:
