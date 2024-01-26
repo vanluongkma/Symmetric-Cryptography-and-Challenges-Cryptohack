@@ -1003,3 +1003,12 @@ print(DECRYPT(nonce, ciphertext, hex(tag)[2:], AD))
 
 ```
 > FLAG: crypto{https://github.com/attr-encrypted/encryptor/pull/22}
+## Reference
+ - https://toadstyle.org/cryptopals/63.txt
+ - https://viblo.asia/p/cryptopals-set-8-abstract-algebra-challenge-63-66-m68Z0Wb9KkG
+ - https://meowmeowxw.gitlab.io/ctf/utctf-2020-crypto/
+ - https://en.wikipedia.org/wiki/Advanced_Encryption_Standard
+ - https://www.geeksforgeeks.org/double-des-and-triple-des/
+ - https://paddingoracle.github.io/
+ - http://blog.redrocket.club/2018/03/27/VolgaCTF-Forbidden/
+ - https://en.wikipedia.org/wiki/Data_Encryption_Standard
