@@ -961,10 +961,10 @@ def encrypt(plaintext):
     }
 ```
  - .
-  - $$TAG = (((((((((((H * AD0) + AD1) * H) + c0) * H) + c1) * H) + c2) * H) + L) * H) + S$$
-  - $$TAG = AD0*H^6 + AD1*H^5 + c0*H^4 + c1*H^3 + c2*H^2 + L*H + S$$
+     - $$TAG = (((((((((((H * AD0) + AD1) * H) + c0) * H) + c1) * H) + c2) * H) + L) * H) + S$$
+     - $$TAG = AD0*H^6 + AD1*H^5 + c0*H^4 + c1*H^3 + c2*H^2 + L*H + S$$
  - Với bài này ta sẽ nhập 2 block và thu được:
-     -   $$TAG = (((((H * c0) + c1) * H) + L) * H + S)$$
+     - $$TAG = (((((H * c0) + c1) * H) + L) * H + S)$$
  
    
      - $$TAG = c0*H^3 + c1*H^2 + L*H + S$$
@@ -974,7 +974,7 @@ def encrypt(plaintext):
      -  $$ TAG_1 - TAG_2 = (c1-c2)*H^2$$
      -  $$TAG_1 - c1*H^2 = TAG_2 - c2*H^2$$
  - Gọi X là TAG giả mạo. Khi đó ta tính được
-     - $X = TAG_1 - c1*H^2 == TAG_2 - c2*H^2$$
+     - $$X = TAG_1 - c1*H^2 == TAG_2 - c2*H^2$$
  - Khi có được X rồi ta tính 
      - $$ forge(tag) = c*H^2 + tag1 - c1*H^2 $$
      - $$ forge(tag) = c*H^2 + X $$
