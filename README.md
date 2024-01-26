@@ -599,22 +599,26 @@ trong đó, X1 ÷ Xn là các khối đầu vào 128-bit.
  - “Meet-in-the-middle” là một kỹ thuật tấn công được sử dụng để giảm đáng kể số lượng khóa có thể phải thử khi tấn công một hệ mã hóa. Đây là một phương pháp tấn công hiệu quả đối với các hệ mã hóa sử dụng khối mã hóa với khóa ngắn.
  - Double DES:
      - Double DES là một kỹ thuật mã hóa sử dụng hai phiên bản DES trên cùng một plaintext. Trong cả hai trường hợp, nó sử dụng các khóa khác nhau để mã hóa plaintext. Cả hai khóa đều được yêu cầu tại thời điểm giải mã.Plaintext 64 bit đi vào phiên bản DES đầu tiên, sau đó được chuyển đổi thành văn bản ở giữa 64 bit bằng khóa đầu tiên và sau đó chuyển sang phiên bản DES thứ hai cung cấp ciphertext 64 bit bằng cách sử dụng khóa thứ hai.
- ![image](https://hackmd.io/_uploads/Sk-9L58F6.png)
+![image](https://github.com/luongdv35/SYMMETRIC_CRYPTOGRAPHY_AND_SYMMETRIC_CIPHERS_CRYPTOHACK/assets/127461439/cd9c3912-3381-4cfd-b8a8-0a999b9a2ab9)
+
      - Mỗi khóa K có độ dài 56 bit, tổng lại Double DES sử dụng khóa 112 bit nhưng mức bảo mật lại là $2^{56}\text{}$ chứ không phải $2^{112}\text{}$, và dễ bị tấn công bở meet-in-the-middle.
      - Mã hóa: Cho một bản mã P và 2 key K1, K2. ciphertext C là sản phẩm của việc mã hóa: $$ C = E_{K2}(E_{K1}(P)) $$
-     - Giải mã: $$ P = D_{K1}(D_{K2}(P)) $$
+     - Giải mã:
+              $$ P = D_{K1}(D_{K2}(P)) $$
 
  - Cuộc tấn công "Meet in the middle 2DES" sử dụng kỹ thuật phân tích tương tự để giảm số lượng khóa cần phải thử xuống $2^{57}\text{}$
  - Cuộc tấn công bao gồm hai giai đoạn:
      - Giai đoạn tiền tính toán: Kẻ tấn công tạo ra một bảng chứa tất cả các tổ hợp có thể có của khóa đầu tiên và bản mã tương ứng, kết quả từ việc mã hóa bản rõ bằng khóa đầu tiên.
      - Giai đoạn tấn công: Kẻ tấn công mã hóa cùng một bản rõ với tất cả các tổ hợp có thể có của khóa thứ hai và so sánh bản mã kết quả với bảng được tạo trong giai đoạn đầu tiên. Khi tìm thấy một kết quả phù hợp, các khóa tương ứng là những khóa chính xác.
  - Quy tình:
-     - Đầu tiên, attacker đoán ``K1``. Gọi dự đoán của attacker là ``K1'``.Với mỗi lần đoán attacker tính $$ M' = E_{K1'}(P )$$
+     - Đầu tiên, attacker đoán ``K1``. Gọi dự đoán của attacker là ``K1'``.Với mỗi lần đoán attacker tính
+       $$ M' = E_{K1'}(P )$$
 sẽ thu được 1 giá trị và lưu kết quả vào trong cùng 1 bảng với ``K1'`` tương ứng
      - Sau khi thêm vào bảng, với mỗi $2^{56}\text{}$ có thể là chìa khóa của ``K1``, attacker chuyển sang đoán ``K2``. Tính:
      $$ M' = D_{K2'}(C)$$
 sau đó kiểm tra ``M'`` có khớp với bất kì ``M`` nào đa lưu trong bảng lưu trữ trước đó hay không.
-     - Nếu tìm thấy: $$ E_{K1'} (P) = D_{K2'}(C) $$ thì ``K1 = K1' và K2 = K2'``
+     - Nếu tìm thấy:
+       $$ E_{K1'} (P) = D_{K2'}(C) $$ thì ``K1 = K1' và K2 = K2'``
  - Bằng cách sử dụng phương pháp này, kẻ tấn công giảm không gian tìm kiếm của các khóa từ $2^{112}\text{}$ xuống $2^{56}\text{}$ + $2^{56}\text{}$ = $2^{57}\text{}$, nhanh hơn đáng kể so với tấn công vét cạn. Cuộc tấn công này còn được gọi là cuộc tấn công “double-DES”, vì nó liên quan đến việc khai thác việc sử dụng hai thao tác DES với các khóa khác nhau.
  - Minh họa
 ```python3
@@ -650,7 +654,8 @@ print(enc.hex())
  - Với bài này được mã hóa 2 lần với key1 và key 2.Tôi sẽ áp dụng cách tấn công meet-in-the-middle ở bên trên đối với bài này để tìm ra key1, key2 và tìm ra flag.
  - Bài này key1, key2 được random 3 bytes và được băm với md5. 
  - Dựa vào hint ``assert len(FLAG) % 16 == 1 # hint`` tôi thấy block cuối sẽ bị lẻ kí tự ``}`` và padding sao cho đủ 16 byte ``pad(b"}", 16)``
- - Tiếp đó tôi sẽ brute force key1, key2 sao cho  $$ E_{K1'} (P) = D_{K2}(C) $$
+ - Tiếp đó tôi sẽ brute force key1, key2 sao cho
+   $$ E_{K1'} (P) = D_{K2}(C) $$
 với key1, key2 được random 3 bytes và được băm với md5. 
 ```python3
 from Crypto.Util.Padding import pad, unpad
@@ -699,7 +704,8 @@ print(flag)
  - Ở đây tôi tìm thấy 1 tool demo [``padding oracle tool``](https://paddingoracle.github.io/) và 1 video demo cho dễ hiểu [``padding oracle video``](https://youtu.be/uDHo-UAM6_4?si=PaJ0nMGgOQoYTKQ2)
  - Giả sử attacker có block cipher $C_1 \text{}$, $C_2 \text{}$, muốn giải mã block2 để có được $P_2 \text{}$. Khi đó attacker thay đổi byte cuối cùng của $C_1 \text{}$ (tạo $C'_1 \text{}$) và gửi (IV, $C'_1 \text{}$ , $C_2 \text{}$) đến máy chủ
  - Máy chủ sẽ trả về phần đệm cuối cùng của block được giải mã $P'_2 \text{}$.
- - Attacker biết byte cuối của $$ D_K(C_2) ⊕ C'_1$$
+ - Attacker biết byte cuối của
+   $$ D_K(C_2) ⊕ C'_1$$
  ```bash!
  '\x01'
 '\x02\x02'
@@ -882,21 +888,22 @@ print("flag: " , pt1 + pt2 )
 
  - Các bạn có thể đọc thêm tại [475.pdf](https://eprint.iacr.org/2016/475.pdf) and [here](http://blog.redrocket.club/2018/03/27/VolgaCTF-Forbidden/)
  - Giả sử $g(X)\text{}$ là hàm $GHASH\text{}$
-    $$g(X) = A_1X^{m+n+1}+\dots+A_mX^{n+2}+C_1X^{n+1}+\dots+C_nX^2+LX+S$$
+    -  $$g(X) = A_1X^{m+n+1}+\dots+A_mX^{n+2}+C_1X^{n+1}+\dots+C_nX^2+LX+S$$
  - Xét tag $T\text{}$ có thể tính bằng:
-   $$g(H) = T $$
+    -  $$g(H) = T $$
  - Giả sử $A_i, C_i\text{}$ là data blocks và ciphertext blocks, $L\text{}$ biểu thị độ dài message và $S\text{}$ là nonce value. Đều là các block 128bit trong trường hữu hạn $GF(2^{128})\text{}$
-   $$f_1(X) \ = \ A_{1,1}X^5 \ + \ C_{1,1}X^4 \ + \ C_{1,2}X^3 \ + \ C_{1,3}X^2 \ + \  LX + S$$
-  $$f_2(X) \ = \ A_{2,1}X^5 \ + \ C_{2,1}X^4 \ + \ C_{2,2}X^3 \ + \ C_{2,3}X^2 \ + \ + LX + S$$
+    -  $$f_1(X) \ = \ A_{1,1}X^5 \ + \ C_{1,1}X^4 \ + \ C_{1,2}X^3 \ + \ C_{1,3}X^2 \ + \  LX + S$$
+    -  $$f_2(X) \ = \ A_{2,1}X^5 \ + \ C_{2,1}X^4 \ + \ C_{2,2}X^3 \ + \ C_{2,3}X^2 \ + \ + LX + S$$
   - $S\text{}$ giống nhau vì cùng nonce
   - Thay $H\text{}$(key hash) sẽ cung cấp cho ta authentication tag $f_1(H) = T_1\text{}$ :
-    $$f'_1(X) \ = \ A_{1,1}X^5 \ + \ C_{1,1}X^4 \ + \ C_{1,2}X^3 \ + \ C_{1,3}X^2 \ + \ LX \ + \  S \ + \ T_1$$
-   $$f'_2(X) \ = \ A_{2,1}X^5 \ + \ C_{2,1}X^4 \ + \ C_{2,2}X^3 \ + \ C_{2,3}X^2 \ + \ LX \ + \ S \ + \ T_2$$
+    -  $$f'_1(X) \ = \ A_{1,1}X^5 \ + \ C_{1,1}X^4 \ + \ C_{1,2}X^3 \ + \ C_{1,3}X^2 \ + \ LX \ + \  S \ + \ T_1$$
+   -   $$f'_2(X) \ = \ A_{2,1}X^5 \ + \ C_{2,1}X^4 \ + \ C_{2,2}X^3 \ + \ C_{2,3}X^2 \ + \ LX \ + \ S \ + \ T_2$$
  - Cộng hai đa thức ở trên ta có
-    $$g(X) = f'_1(X) \ + \ f'_2(X)$$
-  $$g(X) = (A_{1,1} \ + \ A_{2,1})X^5 \ + \ (C_{1,1} \ + \ C_{2,1})X^4 \ + \ ...  \ + \ LX \ + \ T1 \ + \ T2 $$
+  -  $$g(X) = f'_1(X) \ + \ f'_2(X)$$
+  -  $$g(X) = (A_{1,1} \ + \ A_{2,1})X^5 \ + \ (C_{1,1} \ + \ C_{2,1})X^4 \ + \ ...  \ + \ LX \ + \ T1 \ + \ T2 $$
  - $X$(H(hash key)) sẽ nằm trong các nghiệm của đa thức $g(X)$, trong $GF(2^{128})\text{}$  việc thêm các hệ số cũng giống như XOR các khối tương ứng của chúng.
- - Từ đó tính được $S$ từ $X$(H(hash key)) với $$ S =  f'_1(H) \ + \ A_{1,1}H^5 \ + \ C_{1,1}H^4 \ + \ C_{1,2}H^3 \ + \ C_{1,3}H^2 \ + \ LH \ + \ T_1$$
+ - Từ đó tính được $S$ từ $X$(H(hash key)) với
+   $$ S =  f'_1(H) \ + \ A_{1,1}H^5 \ + \ C_{1,1}H^4 \ + \ C_{1,2}H^3 \ + \ C_{1,3}H^2 \ + \ LH \ + \ T_1$$
  - Challenge [forbidden fruit cryptohack](https://aes.cryptohack.org/forbidden_fruit/)
 ```python3
 from Crypto.Cipher import AES
@@ -954,21 +961,23 @@ def encrypt(plaintext):
     }
 ```
  - .
-   $$TAG = (((((((((((H * AD0) + AD1) * H) + c0) * H) + c1) * H) + c2) * H) + L) * H) + S$$
- $$TAG = AD0*H^6 + AD1*H^5 + c0*H^4 + c1*H^3 + c2*H^2 + L*H + S$$
+  - $$TAG = (((((((((((H * AD0) + AD1) * H) + c0) * H) + c1) * H) + c2) * H) + L) * H) + S$$
+  - $$TAG = AD0*H^6 + AD1*H^5 + c0*H^4 + c1*H^3 + c2*H^2 + L*H + S$$
  - Với bài này ta sẽ nhập 2 block và thu được:
-   $$TAG = (((((H * c0) + c1) * H) + L) * H + S)$$
-   hay
-  $$TAG = c0*H^3 + c1*H^2 + L*H + S$$
+     -   $$TAG = (((((H * c0) + c1) * H) + L) * H + S)$$
+ 
+   
+     - $$TAG = c0*H^3 + c1*H^2 + L*H + S$$
  - Ta có:
-       $$TAG_1 = A*H^3 + c1*H^2 + L*H + S$$
-      $$TAG_2 = A*H^3 + c2*H^2 + L*H + S$$
- $$ TAG_1 - TAG_2 = (c1-c2)*H^2$$
-     $$TAG_1 - c1*H^2 = TAG_2 - c2*H^2$$
- - Gọi X là TAG giả mạo. Khi đó ta tính được$$X = TAG_1 - c1*H^2 == TAG_2 - c2*H^2$$
+     -  $$TAG_1 = A*H^3 + c1*H^2 + L*H + S$$
+     -  $$TAG_2 = A*H^3 + c2*H^2 + L*H + S$$
+     -  $$ TAG_1 - TAG_2 = (c1-c2)*H^2$$
+     -  $$TAG_1 - c1*H^2 = TAG_2 - c2*H^2$$
+ - Gọi X là TAG giả mạo. Khi đó ta tính được
+     - $X = TAG_1 - c1*H^2 == TAG_2 - c2*H^2$$
  - Khi có được X rồi ta tính 
-   $$ forge(tag) = c*H^2 + tag1 - c1*H^2 $$
-$$ forge(tag) = c*H^2 + X $$
+     - $$ forge(tag) = c*H^2 + tag1 - c1*H^2 $$
+     - $$ forge(tag) = c*H^2 + X $$
  - Bây giờ ta chỉ cần gửi nonce, ciphertext, forge(tag), AD("Cryptohack") vào server và get flag.
 ```python3
 from Crypto.Util.number import *
