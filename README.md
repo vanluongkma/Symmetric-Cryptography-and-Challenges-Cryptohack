@@ -270,7 +270,7 @@ FE01E01FFE01F10E 1FFEE0010EFEF101 FE1F01E0FE0E01F1
 ![image](https://hackmd.io/_uploads/rkSeZ44F6.png)
 
  - Code minh họa:
-```python!
+```python3
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import*
 import os
@@ -328,7 +328,7 @@ print(f"{decrypt = }")
 ![image](https://hackmd.io/_uploads/Hk36eVNY6.png)
 ![image](https://hackmd.io/_uploads/S1oCeVVYp.png)
  - Code minh họa:
-```python!
+```python3
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import*
 import os
@@ -392,7 +392,7 @@ print(f"{decrypt = }")
 ![image](https://hackmd.io/_uploads/HJ2eV4Et6.png)
 ![image](https://hackmd.io/_uploads/Bkmb4NVFp.png)
  - Code minh họa:
-```python!
+```python3
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import*
 import os
@@ -463,7 +463,7 @@ print(f"{decrypt = }")
 ![image](https://hackmd.io/_uploads/HJi-SV4Fa.png)
 ![image](https://hackmd.io/_uploads/rkRZrNNFT.png)
  - Code minh họa:
-```python!
+```python3
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import*
 import os
@@ -509,7 +509,7 @@ print(f"{decrypt = }")
 ![image](https://hackmd.io/_uploads/rJSuUNEY6.png)
 ![image](https://hackmd.io/_uploads/rkiu8VEKT.png)
  - Code minh họa
-```python!
+```python3
 from Crypto.Cipher import AES
 from Crypto.Util import*
 import secrets, os
@@ -584,7 +584,7 @@ sau đó kiểm tra ``M'`` có khớp với bất kì ``M`` nào đa lưu trong 
      - Nếu tìm thấy: $$ E_{K1'} (P) = D_{K2'}(C) $$ thì ``K1 = K1' và K2 = K2'``
  - Bằng cách sử dụng phương pháp này, kẻ tấn công giảm không gian tìm kiếm của các khóa từ $2^{112}\text{}$ xuống $2^{56}\text{}$ + $2^{56}\text{}$ = $2^{57}\text{}$, nhanh hơn đáng kể so với tấn công vét cạn. Cuộc tấn công này còn được gọi là cuộc tấn công “double-DES”, vì nó liên quan đến việc khai thác việc sử dụng hai thao tác DES với các khóa khác nhau.
  - Minh họa
-```python3!
+```python3
 def meet_in_the_middle_2DES(C, P):
   table = {}
   for i in range(0, 2^56):
@@ -619,7 +619,7 @@ print(enc.hex())
  - Dựa vào hint ``assert len(FLAG) % 16 == 1 # hint`` tôi thấy block cuối sẽ bị lẻ kí tự ``}`` và padding sao cho đủ 16 byte ``pad(b"}", 16)``
  - Tiếp đó tôi sẽ brute force key1, key2 sao cho  $$ E_{K1'} (P) = D_{K2}(C) $$
 với key1, key2 được random 3 bytes và được băm với md5. 
-```python3!
+```python3
 from Crypto.Util.Padding import pad, unpad
 import hashlib
 from Crypto.Cipher import AES
@@ -692,7 +692,7 @@ print(flag)
  - Attacker sẽ có được plaintext $P_2 \text{}$ không quá 256x16 lần thử.
  - Challenge minh họa:
      - Source: [paper plane cryptohack](https://aes.cryptohack.org/paper_plane/)
-```python!
+```python3
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad, unpad
 import os
@@ -796,7 +796,7 @@ d[16] = 2d ⊕ 01 = 2c
 ```
 vậy là ở khối đầu tiên ta đã tìm được chữ ``l``.
  - Source
-```python!
+```python3
 import requests
 from pwn import xor
 from Crypto.Util.number import *
@@ -865,7 +865,7 @@ print("flag: " , pt1 + pt2 )
  - $X$(H(hash key)) sẽ nằm trong các nghiệm của đa thức $g(X)$, trong $GF(2^{128})\text{}$  việc thêm các hệ số cũng giống như XOR các khối tương ứng của chúng.
  - Từ đó tính được $S$ từ $X$(H(hash key)) với $$ S =  f'_1(H) \ + \ A_{1,1}H^5 \ + \ C_{1,1}H^4 \ + \ C_{1,2}H^3 \ + \ C_{1,3}H^2 \ + \ LH \ + \ T_1$$
  - Challenge [forbidden fruit cryptohack](https://aes.cryptohack.org/forbidden_fruit/)
-```python3!
+```python3
 from Crypto.Cipher import AES
 import os
 
@@ -937,7 +937,7 @@ def encrypt(plaintext):
    $$ forge(tag) = c*H^2 + tag1 - c1*H^2 $$
 $$ forge(tag) = c*H^2 + X $$
  - Bây giờ ta chỉ cần gửi nonce, ciphertext, forge(tag), AD("Cryptohack") vào server và get flag.
-```python3!
+```python3
 from Crypto.Util.number import *
 from Crypto.Util.number import *
 from sage.all import *
