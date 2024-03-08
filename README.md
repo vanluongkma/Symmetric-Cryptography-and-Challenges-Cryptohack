@@ -37,7 +37,7 @@
 ![image](https://github.com/luongdv35/SYMMETRIC_CRYPTOGRAPHY_AND_SYMMETRIC_CIPHERS_CRYPTOHACK/assets/127461439/017b7982-61ee-41d2-9a4a-1ec8a979bb54)
 
  - Tiếp theo $C$ sẽ được chia làm 2 phần $L_0$ (32 bit đầu) và $R_0$ ( 32 bit cuối)
-   $$ C \ = \ IP (plaintext) = L_0R_0$$ 
+   $$C \ = \ IP (plaintext) = L_0R_0$$
 ##### Giai đoạn 2
 ![image](https://github.com/luongdv35/SYMMETRIC_CRYPTOGRAPHY_AND_SYMMETRIC_CIPHERS_CRYPTOHACK/assets/127461439/be49dc66-cfae-4c87-9bbb-6452f9f29b13)
 
@@ -64,7 +64,7 @@
  - $R_i = F(R_{i-1}, K_i)$ ⊕ $L_{i-1}$ $(0 < i < 17)$
  - $L_i = R_{i-1}$
 ##### Giai đoạn 3 
- - Áp dụng hoán vị kết thúc FP cho $R_{16}L_{16}$ ta thu được bản mã $$ C \ = \ FP(R_{16}L_{16})$$
+ - Áp dụng hoán vị kết thúc FP cho $R_{16}L_{16}$ ta thu được bản mã $$C \ = \ FP(R_{16}L_{16})$$
 
 ![image](https://github.com/luongdv35/SYMMETRIC_CRYPTOGRAPHY_AND_SYMMETRIC_CIPHERS_CRYPTOHACK/assets/127461439/0dca22ef-bffe-4207-a93c-11e0ac14a7d7)
 
@@ -98,12 +98,12 @@ E0E0E0E0  F1F1F1F1
 ![image](https://hackmd.io/_uploads/rJCxOXdK6.png)
 ##### Quá trình mã hóa
      
- - $$ Ciphertext = E_{K3}(D_{K2}(E_{K1}(Plaintext)) $$
+ - $$Ciphertext = E_{K3}(D_{K2}(E_{K1}(Plaintext)) $$
  
  - Trước tiên, thực hiện mã hóa DES với khóa K1, tiếp tục giải mã DES với khóa K2 và cuối cùng mã hóa DES với khóa K3 (E – Encryption: quá trình mã hóa; D - Decryption: quá trình giải mã; Bản rõ: Dữ liệu đầu vào của phép mã hóa hoặc dữ liệu đầu ra của phép giải mã; Bản mã: Dữ liệu đầu ra của phép mã hóa hoặc dữ liệu đầu vào của phép giải mã).
 ##### Quá trình giải mã
 ![image](https://hackmd.io/_uploads/SkCFuQuFp.png)
-        $$ Plaintext = D_{K1}(E_{K2}(D_{K3}(Ciphertext))) $$
+        $$Plaintext = D_{K1}(E_{K2}(D_{K3}(Ciphertext))) $$
 
 - Quá trình giải mã với việc  giải mã với khóa K3, sau đó mã hóa với khóa K2, và cuối cùng giải mã với khóa K1..
 
@@ -221,7 +221,7 @@ FE01E01FFE01F10E 1FFEE0010EFEF101 FE1F01E0FE0E01F1
  - Hàng cuối cùng dịch trái 3 byte
 ##### MixColumns
 ![image](https://hackmd.io/_uploads/S1xCxywKa.png)
- - Phép biến đổi MixColumns thực hiện biến đổi độc lập từng cột trong ma trận state bằng một phép nhân đa thức. Mỗi cột của state đươc coi là biểu diễn của một đa thức $f(x)\text{}$ trong $GF(2^8)\text{}$ như vậy phép biến đổi MixColumns chính là phép nhân theo modulo với $x^4+1\text{}$ với một đa thức cố định định nghĩa như sau: $$ c(x) \ = \ 3x^{3} \ + \ x^{2} \ + \ x \ + \ 2 \ (modulo  \ x^{4} \ + \ 1 \ ) $$
+ - Phép biến đổi MixColumns thực hiện biến đổi độc lập từng cột trong ma trận state bằng một phép nhân đa thức. Mỗi cột của state đươc coi là biểu diễn của một đa thức $f(x)\text{}$ trong $GF(2^8)\text{}$ như vậy phép biến đổi MixColumns chính là phép nhân theo modulo với $x^4+1\text{}$ với một đa thức cố định định nghĩa như sau: $$c(x) \ = \ 3x^{3} \ + \ x^{2} \ + \ x \ + \ 2 \ (modulo  \ x^{4} \ + \ 1 \ ) $$
 ![image](https://github.com/luongdv35/SYMMETRIC_CRYPTOGRAPHY_AND_SYMMETRIC_CIPHERS_CRYPTOHACK/assets/127461439/349fe159-dacf-41fe-9335-84fd0299a625)
 
  - Phép nhân đa thức trên có thể biểu diễn dưới dạng phép nhân ma trận như sau
@@ -313,8 +313,8 @@ print(f"{decrypt = }")
 ### CBC (Cipher block chaining)
  - AES CBC (Advanced Encryption Standard Cipher Block Chaining) là một chế độ hoạt động của thuật toán mã hóa AES (Advanced Encryption Standard). Đây là một trong những chế độ mã hóa phổ biến và được sử dụng rộng rãi trong các hệ thống bảo mật. Là chế độ mã hóa chuỗi, kết quả mã hóa của khối dữ liệu trước (ciphertext) sẽ được tổ hợp với khối dữ liệu kế tiếp (plaintext) trước khi thực thi mã hóa.
  - Mã hóa CBC:
-    $$ C_i = E_K(P_i ⊕ C_{i-1})$$
-    $$ C_0 = IV $$
+    $$C_i = E_K(P_i ⊕ C_{i-1})$$
+    $$C_0 = IV $$
      - Lần mã hóa đầu tiên:
          - Plaintext XOR với vector khởi tạo IV
          - Kết quả bước trên là đầu vào cho việc thực thi thuật toán mã hóa với khóa mã K
@@ -322,8 +322,8 @@ print(f"{decrypt = }")
          - Plaintext XOR với ciphertext của lần mã hóa trước đó.
          - Kết quả bước trên là đầu vào cho việc thực thi thuật toán mã hóa với khóa mã K
  - Giải mã CBC:
-    $$ P_i = D_K(C_i)⊕C_{i-1} $$
-    $$ C_0 = IV $$
+    $$P_i = D_K(C_i)⊕C_{i-1} $$
+    $$C_0 = IV $$
      - Lần giải mã đầu tiên:
          - Ciphertext được thực thi quá trình giải mã với khóa mã K
          - Kết quả bước trên được XOR với vector khởi tạo IV để tạo ra plaintext
@@ -374,9 +374,9 @@ print(f"{decrypt = }")
 ### PCBC (Propagating Cipher block chaining)
  - AES PCBC (Advanced Encryption Standard Propagating Cipher Block Chaining) là một chế độ hoạt động khác của thuật toán mã hóa AES (Advanced Encryption Standard). PCBC là một biến thể của chế độ CBC và thêm vào một bước thay đổi (propagation) để tăng tính ngẫu nhiên và đảm bảo tính toàn vẹn của dữ liệu.
  - Mã hóa PCBC
-     $$ C_i = E_K(P_i⊕P_{i-1}⊕C_{i-1}, ), \ P_0 ⊕ C_0 = IV$$
+     $$C_i = E_K(P_i⊕P_{i-1}⊕C_{i-1}, ), \ P_0 ⊕ C_0 = IV$$
  - Giải mã PCBC
-     $$ P_i = D_K(C_i)⊕P_{i-1}⊕C_{i-1}, \ P_0 ⊕ C_0 = IV $$ 
+     $$P_i = D_K(C_i)⊕P_{i-1}⊕C_{i-1}, \ P_0 ⊕ C_0 = IV $$
  - Dưới đây là mô hình mã hóa và giải mã AES-PCBC
 ![image](https://github.com/luongdv35/SYMMETRIC_CRYPTOGRAPHY_AND_SYMMETRIC_CIPHERS_CRYPTOHACK/assets/127461439/5ff483e8-b16a-42d9-b331-e6eecf34980c)
 
@@ -398,7 +398,7 @@ print(f"{decrypt = }")
        - Giá trị của bước trên được mã hóa để tạo ra một khối giá trị chứa b bit.
        - s bit MSB của kết quả trên sẽ được dùng để XOR với s bit dữ liệu (plaintext) để tạo ra s bit ciphertext.
  - Giải mã CFB:
-    $$ P_i = {E_K(C_{i-1})⊕C_i} $$
+    $$P_i = {E_K(C_{i-1})⊕C_i} $$
  - Ưu điểm:
     - Khả năng bảo mật cao hơn ECB
     - Quá trình giải mã (mã hóa nghịch) vẫn có thể thực hiện song song nhiều khối dữ liệu.
@@ -602,9 +602,9 @@ trong đó, X1 ÷ Xn là các khối đầu vào 128-bit.
 ![image](https://github.com/luongdv35/SYMMETRIC_CRYPTOGRAPHY_AND_SYMMETRIC_CIPHERS_CRYPTOHACK/assets/127461439/cd9c3912-3381-4cfd-b8a8-0a999b9a2ab9)
 
      - Mỗi khóa K có độ dài 56 bit, tổng lại Double DES sử dụng khóa 112 bit nhưng mức bảo mật lại là $2^{56}\text{}$ chứ không phải $2^{112}\text{}$, và dễ bị tấn công bở meet-in-the-middle.
-     - Mã hóa: Cho một bản mã P và 2 key K1, K2. ciphertext C là sản phẩm của việc mã hóa: $$ C = E_{K2}(E_{K1}(P)) $$
+     - Mã hóa: Cho một bản mã P và 2 key K1, K2. ciphertext C là sản phẩm của việc mã hóa: $$C = E_{K2}(E_{K1}(P)) $$
      - Giải mã:
-              $$ P = D_{K1}(D_{K2}(P)) $$
+              $$P = D_{K1}(D_{K2}(P)) $$
 
  - Cuộc tấn công "Meet in the middle 2DES" sử dụng kỹ thuật phân tích tương tự để giảm số lượng khóa cần phải thử xuống $2^{57}\text{}$
  - Cuộc tấn công bao gồm hai giai đoạn:
@@ -612,13 +612,13 @@ trong đó, X1 ÷ Xn là các khối đầu vào 128-bit.
      - Giai đoạn tấn công: Kẻ tấn công mã hóa cùng một bản rõ với tất cả các tổ hợp có thể có của khóa thứ hai và so sánh bản mã kết quả với bảng được tạo trong giai đoạn đầu tiên. Khi tìm thấy một kết quả phù hợp, các khóa tương ứng là những khóa chính xác.
  - Quy tình:
      - Đầu tiên, attacker đoán ``K1``. Gọi dự đoán của attacker là ``K1'``.Với mỗi lần đoán attacker tính
-       $$ M' = E_{K1'}(P )$$
+       $$M' = E_{K1'}(P )$$
 sẽ thu được 1 giá trị và lưu kết quả vào trong cùng 1 bảng với ``K1'`` tương ứng
      - Sau khi thêm vào bảng, với mỗi $2^{56}\text{}$ có thể là chìa khóa của ``K1``, attacker chuyển sang đoán ``K2``. Tính:
-     $$ M' = D_{K2'}(C)$$
+       $$M' = D_{K2'}(C)$$
 sau đó kiểm tra ``M'`` có khớp với bất kì ``M`` nào đa lưu trong bảng lưu trữ trước đó hay không.
      - Nếu tìm thấy:
-       $$ E_{K1'} (P) = D_{K2'}(C) $$ thì ``K1 = K1' và K2 = K2'``
+       $$E_{K1'} (P) = D_{K2'} (C)$$ thì ``K1 = K1' và K2 = K2'``
  - Bằng cách sử dụng phương pháp này, kẻ tấn công giảm không gian tìm kiếm của các khóa từ $2^{112}\text{}$ xuống $2^{56}\text{}$ + $2^{56}\text{}$ = $2^{57}\text{}$, nhanh hơn đáng kể so với tấn công vét cạn. Cuộc tấn công này còn được gọi là cuộc tấn công “double-DES”, vì nó liên quan đến việc khai thác việc sử dụng hai thao tác DES với các khóa khác nhau.
  - Minh họa
 ```python3
@@ -631,7 +631,7 @@ def meet_in_the_middle_2DES(C, P):
       return table[D(C, i)], i
 ```
  - Challenge Minh họa
-```python3!
+```python3
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad
 from hashlib import md5
@@ -655,7 +655,7 @@ print(enc.hex())
  - Bài này key1, key2 được random 3 bytes và được băm với md5. 
  - Dựa vào hint ``assert len(FLAG) % 16 == 1 # hint`` tôi thấy block cuối sẽ bị lẻ kí tự ``}`` và padding sao cho đủ 16 byte ``pad(b"}", 16)``
  - Tiếp đó tôi sẽ brute force key1, key2 sao cho
-   $$ E_{K1'} (P) = D_{K2}(C) $$
+   $$E_{K1'} (P) = D_{K2}(C) $$
 với key1, key2 được random 3 bytes và được băm với md5. 
 ```python3
 from Crypto.Util.Padding import pad, unpad
@@ -705,7 +705,7 @@ print(flag)
  - Giả sử attacker có block cipher $C_1 \text{}$, $C_2 \text{}$, muốn giải mã block2 để có được $P_2 \text{}$. Khi đó attacker thay đổi byte cuối cùng của $C_1 \text{}$ (tạo $C'_1 \text{}$) và gửi (IV, $C'_1 \text{}$ , $C_2 \text{}$) đến máy chủ
  - Máy chủ sẽ trả về phần đệm cuối cùng của block được giải mã $P'_2 \text{}$.
  - Attacker biết byte cuối của
-   $$ D_K(C_2) ⊕ C'_1$$
+   $$D_K(C_2) ⊕ C'_1$$
  ```bash!
  '\x01'
 '\x02\x02'
@@ -896,14 +896,14 @@ print("flag: " , pt1 + pt2 )
     -  $$f_2(X) \ = \ A_{2,1}X^5 \ + \ C_{2,1}X^4 \ + \ C_{2,2}X^3 \ + \ C_{2,3}X^2 \ + \ + LX + S$$
   - $S\text{}$ giống nhau vì cùng nonce
   - Thay $H\text{}$(key hash) sẽ cung cấp cho ta authentication tag $f_1(H) = T_1\text{}$ :
-    -  $$f'_1(X) \ = \ A_{1,1}X^5 \ + \ C_{1,1}X^4 \ + \ C_{1,2}X^3 \ + \ C_{1,3}X^2 \ + \ LX \ + \  S \ + \ T_1$$
-   -   $$f'_2(X) \ = \ A_{2,1}X^5 \ + \ C_{2,1}X^4 \ + \ C_{2,2}X^3 \ + \ C_{2,3}X^2 \ + \ LX \ + \ S \ + \ T_2$$
+    -  $$f_1'(X) \ = \ A_{1,1}X^5 \ + \ C_{1,1}X^4 \ + \ C_{1,2}X^3 \ + \ C_{1,3}X^2 \ + \ LX \ + \  S \ + \ T_1$$
+   -   $$f_2'(X) \ = \ A_{2,1}X^5 \ + \ C_{2,1}X^4 \ + \ C_{2,2}X^3 \ + \ C_{2,3}X^2 \ + \ LX \ + \ S \ + \ T_2$$
  - Cộng hai đa thức ở trên ta có
-  -  $$g(X) = f'_1(X) \ + \ f'_2(X)$$
+  -  $$g(X) = f_1'(X) \ + \ f_2'(X)$$
   -  $$g(X) = (A_{1,1} \ + \ A_{2,1})X^5 \ + \ (C_{1,1} \ + \ C_{2,1})X^4 \ + \ ...  \ + \ LX \ + \ T1 \ + \ T2 $$
  - $X$(H(hash key)) sẽ nằm trong các nghiệm của đa thức $g(X)$, trong $GF(2^{128})\text{}$  việc thêm các hệ số cũng giống như XOR các khối tương ứng của chúng.
  - Từ đó tính được $S$ từ $X$(H(hash key)) với
-   $$ S =  f'_1(H) \ + \ A_{1,1}H^5 \ + \ C_{1,1}H^4 \ + \ C_{1,2}H^3 \ + \ C_{1,3}H^2 \ + \ LH \ + \ T_1$$
+   $$S =  f_1'(H) \ + \ A_{1,1}H^5 \ + \ C_{1,1}H^4 \ + \ C_{1,2}H^3 \ + \ C_{1,3}H^2 \ + \ LH \ + \ T_1$$
  - Challenge [forbidden fruit cryptohack](https://aes.cryptohack.org/forbidden_fruit/)
 ```python3
 from Crypto.Cipher import AES
@@ -962,22 +962,22 @@ def encrypt(plaintext):
 ```
  - .
      - $$TAG = (((((((((((H * AD0) + AD1) * H) + c0) * H) + c1) * H) + c2) * H) + L) * H) + S$$
-     - $$TAG = AD0*H^6 + AD1*H^5 + c0*H^4 + c1*H^3 + c2*H^2 + L*H + S$$
+     - $$TAG = AD0 * H^6 + AD1 * H^5 + c0 * H^4 + c1 * H^3 + c2 * H^2 + L * H + S$$
  - Với bài này ta sẽ nhập 2 block và thu được:
      - $$TAG = (((((H * c0) + c1) * H) + L) * H + S)$$
  
    
-     - $$TAG = c0*H^3 + c1*H^2 + L*H + S$$
+     - $$TAG = c0 * H^3 + c1 * H^2 + L * H + S$$
  - Ta có:
-     -  $$TAG_1 = A*H^3 + c1*H^2 + L*H + S$$
-     -  $$TAG_2 = A*H^3 + c2*H^2 + L*H + S$$
-     -  $$ TAG_1 - TAG_2 = (c1-c2)*H^2$$
-     -  $$TAG_1 - c1*H^2 = TAG_2 - c2*H^2$$
+     -  $$TAG_1 = A * H^3 + c1 * H^2 + L * H + S$$
+     -  $$TAG_2 = A * H^3 + c2 * H^2 + L * H + S$$
+     -  $$TAG_1 - TAG_2 = (c1-c2) * H^2$$
+     -  $$TAG_1 - c1 * H^2 = TAG_2 - c2 * H^2$$
  - Gọi X là TAG giả mạo. Khi đó ta tính được
-     - $$X = TAG_1 - c1*H^2 == TAG_2 - c2*H^2$$
+     - $$X = TAG_1 - c1 * H^2 == TAG_2 - c2 * H^2$$
  - Khi có được X rồi ta tính 
-     - $$ forge(tag) = c*H^2 + tag1 - c1*H^2 $$
-     - $$ forge(tag) = c*H^2 + X $$
+     - $$forge(tag) = c * H^2 + tag1 - c1 * H^2 $$
+     - $$forge(tag) = c * H^2 + X $$
  - Bây giờ ta chỉ cần gửi nonce, ciphertext, forge(tag), AD("Cryptohack") vào server và get flag.
 ```python3
 from Crypto.Util.number import *
