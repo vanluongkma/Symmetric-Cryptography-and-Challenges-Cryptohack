@@ -2,30 +2,40 @@
 ## DES (Data Encryption Standard)
 ### Khái niệm 
  - DES(Data Encryption Standard)  là thuật toán mã hóa theo khối, nó xử lý từng khối thông tin của bản rõ có độ dài xác định là 64 bit. Trước khi đi vào 16 chu trình chính, khối dữ liệu cần bảo mật sẽ được tách ra thành từng khối 64 bit, và từng khối 64 bit này sẽ lần lượt được đưa vào 16 vòng mã hóa DES để thực hiện. Tiền thân của nó là Lucifer, một thuật toán do IBM phát triển. Cuối năm 1976, DES được chọn làm chuẩn mã hóa dữ liệu của nước Mỹ, sau đó được sử dụng rộng rãi trên toàn thế giới. DES cùng với mã hóa bất đối xứng đã mở ra một thời kỳ mới trong ngành mã hóa thông tin. Trước DES, viện nghiên cứu và sử dụng mã hóa dữ liệu chỉ giới hạn trong chính phủ và quân đội.
- ![image](https://hackmd.io/_uploads/r1BBZXOtT.png)
+
+![image](https://github.com/luongdv35/luongdv35.github.io/assets/127461439/8ae39781-9c44-403e-9535-fd22101eda51)
+
  - Đầu vào của DES là khối 64 bit, đầu ra cũng là khối 64 bit. Khóa mã hóa có độ dài 56 bit, nhưng thực chất ban đầu là 64 bit, được lấy đi các bit ở vị trí chia hết cho 8 dùng để kiểm tra tính chẵn lẻ.
 ### Cơ chế hoạt động
-  ![image](https://hackmd.io/_uploads/BylWDQ_Kp.png)
+ 
+  ![image](https://github.com/luongdv35/luongdv35.github.io/assets/127461439/82da8e30-017c-4ef9-92f1-5fb0741e2552)
+
 ##### Thuật toán sinh khóa con
  - Sơ đồ tổng quát:
- ![image](https://hackmd.io/_uploads/B1VZyMx5p.png)
- 
- ![image](https://hackmd.io/_uploads/Sk_PWfe96.png)
- ![image](https://hackmd.io/_uploads/By6_Efx5a.png)
+
+ ![image](https://github.com/luongdv35/luongdv35.github.io/assets/127461439/5b552162-34f2-4885-b7da-ef25e353ac95)
+
+ ![image](https://github.com/luongdv35/luongdv35.github.io/assets/127461439/accbc150-5489-4840-b9b1-bd06bd1956d9)
+
+![image](https://github.com/luongdv35/luongdv35.github.io/assets/127461439/432efe78-7ef2-4aa0-a649-9d2eb9537e25)
+
  - Thực hiện hoán vị
-     ![image](https://github.com/luongdv35/SYMMETRIC_CRYPTOGRAPHY_AND_SYMMETRIC_CIPHERS_CRYPTOHACK/assets/127461439/ddf5cafe-9bcd-4a27-9f6a-474f53ac12b0)
+
+![image](https://github.com/luongdv35/luongdv35.github.io/assets/127461439/39928ab4-a8b6-4e1d-898a-fcf27cb1baf0)
 
      - $PC1K = PC1(K)$
      - Gọi $C_0$ là nửa trái của PC1K
      - Gọi $D_0$ là nửa phải của PC1K
      - Sau khi thực hiện $PC1$ như hình ảnh trên và bỏ các bit kiểm tra ``8, 16, 24, 32, 40, 48, 56, 64`` thì PC1K có độ dài 56 bit
  - Tính các giá trị dịch vòng $C_i, D_i$
+
 ![image](https://github.com/luongdv35/SYMMETRIC_CRYPTOGRAPHY_AND_SYMMETRIC_CIPHERS_CRYPTOHACK/assets/127461439/ee95f04e-7a90-4bbe-81b2-8702463b8b06)
 
      - $C_i = RotleftShift(C_{i-1}, S_i)$
      - $D_i = RotleftShift(D_{i-1}, S_i)$
      - Chúng ta có thể nhìn bảng trên để dễ hình dung.
  - Thực hiện hoán vị $PC2$ và gán khóa con $K_i$
+
  ![image](https://github.com/luongdv35/SYMMETRIC_CRYPTOGRAPHY_AND_SYMMETRIC_CIPHERS_CRYPTOHACK/assets/127461439/b512952e-4509-4723-830d-17a06b134e99)
 
 
@@ -34,31 +44,43 @@
 #### Quá trình mã hóa DES
 ##### Giai đoạn 1
  - Plaintext 64bit được đưa vào $IP$ , 1 chuỗi $C$ sẽ được tạo ra bằng cách thực hoán vị các bit của plaintext theo hoán vị $IP$ 
+
 ![image](https://github.com/luongdv35/SYMMETRIC_CRYPTOGRAPHY_AND_SYMMETRIC_CIPHERS_CRYPTOHACK/assets/127461439/017b7982-61ee-41d2-9a4a-1ec8a979bb54)
 
  - Tiếp theo $C$ sẽ được chia làm 2 phần $L_0$ (32 bit đầu) và $R_0$ ( 32 bit cuối)
    $$C \ = \ IP (plaintext) = L_0R_0$$
 ##### Giai đoạn 2
+
 ![image](https://github.com/luongdv35/SYMMETRIC_CRYPTOGRAPHY_AND_SYMMETRIC_CIPHERS_CRYPTOHACK/assets/127461439/be49dc66-cfae-4c87-9bbb-6452f9f29b13)
 
  - Lấy $R_0$ đi qua hàm  Feistel, Với giá trị đầu vào $R_{i-1}$ (32 bit), $K_i$ (48 bit)
  - $R_{i-1}$ khi đi qua hoán vị $E$ sẽ tăng độ dài từ 32 -> 48 bit để cùng độ dài và thực hiện XOR với $K_i$
+
 ![image](https://github.com/luongdv35/SYMMETRIC_CRYPTOGRAPHY_AND_SYMMETRIC_CIPHERS_CRYPTOHACK/assets/127461439/eabb51a0-9999-46a2-82c6-eb1a3f4d9685)
 
  - Tính $E(R_i)$ ⊕ $K_i$
  - Tách kết quả của phép tính trên thành 8 khối, mỗi khối 6 bit và đưa lần lượt vào bảng $S-box$ : S1, S2, S3, S4, ..., S8.
   
-  ![image](https://hackmd.io/_uploads/Hk7CFkbca.png)
-  ![image](https://hackmd.io/_uploads/S1ORFk-5a.png)
-  ![image](https://hackmd.io/_uploads/rJlJ9kbcp.png)
-  ![image](https://hackmd.io/_uploads/Bkv1q1bqp.png)
-  ![image](https://hackmd.io/_uploads/rJn1c1-qa.png)
-  ![image](https://hackmd.io/_uploads/rkfl9kbcT.png)
-  ![image](https://hackmd.io/_uploads/SJsgq1bcp.png)
-  ![image](https://hackmd.io/_uploads/rkQZ5J-9T.png)
+![image](https://github.com/luongdv35/luongdv35.github.io/assets/127461439/320d4db3-13a1-4322-ae0b-fe54e03769a5)
+
+  ![image](https://hackmd.io/_uploads/S1ORFk-5a.png)![image](https://github.com/luongdv35/luongdv35.github.io/assets/127461439/22868a25-ca1c-4f9f-bda6-0061f9933ae4)
+
+  ![image](https://github.com/luongdv35/luongdv35.github.io/assets/127461439/def8a421-f335-431f-88a6-4fa3f59e707a)
+
+![image](https://github.com/luongdv35/luongdv35.github.io/assets/127461439/087993b0-ddf9-47a3-b710-172ed85393c1)
+
+![image](https://github.com/luongdv35/luongdv35.github.io/assets/127461439/7f5d6347-6d36-4501-b95d-1b898fe2e1b5)
+
+![image](https://github.com/luongdv35/luongdv35.github.io/assets/127461439/053adbf2-9ab8-4eba-87dc-f80ccdfd074a)
+
+![image](https://github.com/luongdv35/luongdv35.github.io/assets/127461439/8391b099-3b70-4668-b0cf-756d5982bc87)
+
+![image](https://github.com/luongdv35/luongdv35.github.io/assets/127461439/3e74a97a-06f2-4ea0-a3a9-48367b58a0c0)
+
  -  Với mỗi $S-box$ sẽ có 6bit đầu vào và 4 bit đầu ra
  - Kết quả từ 8 khối 6bit sẽ cho ra 8 khối 4 bit $C_i$
   - Mỗi 4 bit đầu ra của các  $S-box$ sẽ được ghép lại, theo thứ tự các và được đem vào  $P-box$.
+
 ![image](https://github.com/luongdv35/SYMMETRIC_CRYPTOGRAPHY_AND_SYMMETRIC_CIPHERS_CRYPTOHACK/assets/127461439/6ee6095a-b1fd-4303-8960-bcaee5e18157)
 
  - $R_i = F(R_{i-1}, K_i)$ ⊕ $L_{i-1}$ $(0 < i < 17)$
@@ -71,6 +93,7 @@
 
  - Quá trình giải mã của DES cũng tương tự quá trình mã hóa. Chỉ khác nhau ở: ``Li = Ri-1``. ``Ri = Li-1 ⊕  f(Ri-1, K16-i+1)``. Như vậy khóa K của hàm F sẽ đi từ khóa K16 -> K1.
 ##### Hàm Feistel(F)
+
 ![image](https://github.com/luongdv35/SYMMETRIC_CRYPTOGRAPHY_AND_SYMMETRIC_CIPHERS_CRYPTOHACK/assets/127461439/3fc108aa-c761-4953-ad56-4f5b7e66adfd)
 
  - Đầu vào hàm f có 2 biến:
@@ -95,14 +118,18 @@ E0E0E0E0  F1F1F1F1
 ```
 ## Triple DES
  - Thuật toán 3DES sử dụng một nhóm khóa bao gồm 03 khóa DES là K1, K2 và K3, mỗi khóa có giá trị 56 bít. Thuật toán mã hóa thực hiện như sau:
-![image](https://hackmd.io/_uploads/rJCxOXdK6.png)
+
+![image](https://github.com/luongdv35/luongdv35.github.io/assets/127461439/91ee03c2-c2fc-4059-ae01-d76c3e42c1ac)
+
 ##### Quá trình mã hóa
      
  - $$Ciphertext = E_{K3}(D_{K2}(E_{K1}(Plaintext)) $$
  
  - Trước tiên, thực hiện mã hóa DES với khóa K1, tiếp tục giải mã DES với khóa K2 và cuối cùng mã hóa DES với khóa K3 (E – Encryption: quá trình mã hóa; D - Decryption: quá trình giải mã; Bản rõ: Dữ liệu đầu vào của phép mã hóa hoặc dữ liệu đầu ra của phép giải mã; Bản mã: Dữ liệu đầu ra của phép mã hóa hoặc dữ liệu đầu vào của phép giải mã).
 ##### Quá trình giải mã
-![image](https://hackmd.io/_uploads/SkCFuQuFp.png)
+
+![image](https://github.com/luongdv35/luongdv35.github.io/assets/127461439/67216127-e244-4185-9ac2-dbb7001edef9)
+
         $$Plaintext = D_{K1}(E_{K2}(D_{K3}(Ciphertext))) $$
 
 - Quá trình giải mã với việc  giải mã với khóa K3, sau đó mã hóa với khóa K2, và cuối cùng giải mã với khóa K1..
@@ -193,9 +220,11 @@ FE01E01FFE01F10E 1FFEE0010EFEF101 FE1F01E0FE0E01F1
      -  AddRoundKey 
 #### Xây dựng bảng $S-box$
  - Bảng $S-box$ thuận được sinh ra bằng việc xác định nghịch đảo cho mọt giá trị nhất định trên trường $GF(2^8) = GF(2)[x]/(x^8+x^4+x^3+x+1)$.Những nghịch đảo được chuyển đôi thông qua phép biến đổi affine.
+
 ![image](https://github.com/luongdv35/SYMMETRIC_CRYPTOGRAPHY_AND_SYMMETRIC_CIPHERS_CRYPTOHACK/assets/127461439/85477f37-c919-4d69-8ac5-3e5fcbc60414)
 
  - $S-box$ nghịch đảo chỉ đơn giản là $S-box$ chạy ngược. Nó được tính bằng phép biến đổi affine nghịch đảo các giá trị đầu vào. Phép biến đổi affine nghịch đảo được biểu diễn như sau:
+
 ![image](https://github.com/luongdv35/SYMMETRIC_CRYPTOGRAPHY_AND_SYMMETRIC_CIPHERS_CRYPTOHACK/assets/127461439/af947800-60c0-46f8-a95f-904c99a4b9b9)
 
 #### Thuật toán sinh khóa
@@ -203,38 +232,52 @@ FE01E01FFE01F10E 1FFEE0010EFEF101 FE1F01E0FE0E01F1
      - Rotword : quay trái 8 bit
      - SubBytes
      - Rcon: tính giá trị Rcon(i): $Rcon(i) = x(i-1) mod (x^8+x^4+x^3+x+1)$
-     - ShiftRow:![image](https://github.com/luongdv35/SYMMETRIC_CRYPTOGRAPHY_AND_SYMMETRIC_CIPHERS_CRYPTOHACK/assets/127461439/af7bfc60-cc03-4935-bb23-af630945a157)
+     - ShiftRow:
+   
+   ![image](https://github.com/luongdv35/SYMMETRIC_CRYPTOGRAPHY_AND_SYMMETRIC_CIPHERS_CRYPTOHACK/assets/127461439/af7bfc60-cc03-4935-bb23-af630945a157)
 
 
  ### Cơ chế hoạt động
+
 ![image](https://github.com/luongdv35/SYMMETRIC_CRYPTOGRAPHY_AND_SYMMETRIC_CIPHERS_CRYPTOHACK/assets/127461439/79f7a85a-42e5-4992-aaf2-ac945a41e0a6)
 
 ##### SubBytes 
-![image](https://hackmd.io/_uploads/S1d3gJDYT.png)
+
+![image](https://github.com/luongdv35/luongdv35.github.io/assets/127461439/7b378cde-9ed0-4639-b5b8-0203e44cc184)
+
  - Từng phần tử của ma trận state được thay thế bằng giá trị tra cứu trong bảng S-BOX
 ##### ShiftRows 
-![image](https://hackmd.io/_uploads/BkqTxyvtp.png)
+
+![image](https://github.com/luongdv35/luongdv35.github.io/assets/127461439/82dd714d-ac60-4e4e-9a67-12f1332e6718)
+
  - Các hàng của ma trận state được dịch chuyển theo chu kỳ.
  - Hàng đầu tiên giữ nguyên
  - Hàng thứ hai dịch trái 1 byte
  - Hàng thứ ba dịch trái 2 byte
  - Hàng cuối cùng dịch trái 3 byte
 ##### MixColumns
-![image](https://hackmd.io/_uploads/S1xCxywKa.png)
+
+![image](https://github.com/luongdv35/luongdv35.github.io/assets/127461439/29f994ee-4cdf-4db4-9aa3-55e00c37c1a8)
+
  - Phép biến đổi MixColumns thực hiện biến đổi độc lập từng cột trong ma trận state bằng một phép nhân đa thức. Mỗi cột của state đươc coi là biểu diễn của một đa thức $f(x)\text{}$ trong $GF(2^8)\text{}$ như vậy phép biến đổi MixColumns chính là phép nhân theo modulo với $x^4+1\text{}$ với một đa thức cố định định nghĩa như sau: $$c(x) \ = \ 3x^{3} \ + \ x^{2} \ + \ x \ + \ 2 \ (modulo  \ x^{4} \ + \ 1 \ ) $$
+
 ![image](https://github.com/luongdv35/SYMMETRIC_CRYPTOGRAPHY_AND_SYMMETRIC_CIPHERS_CRYPTOHACK/assets/127461439/349fe159-dacf-41fe-9335-84fd0299a625)
 
  - Phép nhân đa thức trên có thể biểu diễn dưới dạng phép nhân ma trận như sau
+
 ![image](https://github.com/luongdv35/SYMMETRIC_CRYPTOGRAPHY_AND_SYMMETRIC_CIPHERS_CRYPTOHACK/assets/127461439/0b2919f2-0076-4865-b3bd-7215edff84a0)
 
 
  - [Rijndael MixColumns](https://en.wikipedia.org/wiki/Rijndael_MixColumns)
  - Ví dụ về phép MixColumns
+
 ![image](https://github.com/luongdv35/SYMMETRIC_CRYPTOGRAPHY_AND_SYMMETRIC_CIPHERS_CRYPTOHACK/assets/127461439/8980a356-a1b6-4a5e-983e-fcb9551df792)
 
 
 ##### AddRoundKey
-![image](https://hackmd.io/_uploads/rkJJWyDYT.png)
+
+![image](https://github.com/luongdv35/luongdv35.github.io/assets/127461439/c7c0b955-4c1d-4693-9e49-233c08ede6e0)
+
  - Trong thao tác AddRoundKey, 128 bit của ma trận state sẽ được XOR với 128 bit của khóa con của từng vòng. Vì sử dụng phép XOR nên phép biến đổi ngược của AddRoundKey trong cấu trúc giải mã cũng chính là AddRoundKey. Việc kết hợp với khóa bí mật tạo ra tính làm rối (confusion) của mã hóa. Sự phức tạp của thao tác mở rộng khóa (KeySchedule) giúp gia tăng tính làm rối này
 #### Tóm tắt hoạt động
 ##### 1.Key expansion: 
@@ -278,6 +321,7 @@ FE01E01FFE01F10E 1FFEE0010EFEF101 FE1F01E0FE0E01F1
      - Không đảm bảo tính toàn vẹn
      - Không hỗ trợ xử lý dữ liệu lớn
  - Dưới đây là mô hình mã hóa và giải mã AES-ECB:
+
 ![image](https://github.com/luongdv35/SYMMETRIC_CRYPTOGRAPHY_AND_SYMMETRIC_CIPHERS_CRYPTOHACK/assets/127461439/b26f3431-7684-4d90-9f25-9c2cf386c9df)
 
 ![image](https://github.com/luongdv35/SYMMETRIC_CRYPTOGRAPHY_AND_SYMMETRIC_CIPHERS_CRYPTOHACK/assets/127461439/fcf4cdbd-1b94-4704-9281-78558502c19a)
@@ -339,6 +383,7 @@ print(f"{decrypt = }")
      - Lỗi bit bị lan truyền. Nếu một lỗi bit xuất hiện trên ciphertext của một khối dữ liệu thì nó sẽ làm sai kết quả giải mã của khối đữ liệu đó và khối dữ liệu tiếp theo.
      - Không thể thực thi quá trình mã hóa song song vì xử lý của khối dữ liệu sau phụ thuộc vào ciphertext của khối dữ liệu trước, trừ lần mã hóa đầu tiên.
  - Dưới đây là mô hình mã hóa và giải mã AES-CBC
+
 ![image](https://github.com/luongdv35/SYMMETRIC_CRYPTOGRAPHY_AND_SYMMETRIC_CIPHERS_CRYPTOHACK/assets/127461439/c675806e-dfcf-4947-b3c9-e24ec698e84a)
 
 ![image](https://github.com/luongdv35/SYMMETRIC_CRYPTOGRAPHY_AND_SYMMETRIC_CIPHERS_CRYPTOHACK/assets/127461439/416a166e-5c6e-4059-aaf7-08f4df842024)
@@ -378,6 +423,7 @@ print(f"{decrypt = }")
  - Giải mã PCBC
      $$P_i = D_K(C_i)⊕P_{i-1}⊕C_{i-1}, \ P_0 ⊕ C_0 = IV $$
  - Dưới đây là mô hình mã hóa và giải mã AES-PCBC
+
 ![image](https://github.com/luongdv35/SYMMETRIC_CRYPTOGRAPHY_AND_SYMMETRIC_CIPHERS_CRYPTOHACK/assets/127461439/5ff483e8-b16a-42d9-b331-e6eecf34980c)
 
 ![image](https://github.com/luongdv35/SYMMETRIC_CRYPTOGRAPHY_AND_SYMMETRIC_CIPHERS_CRYPTOHACK/assets/127461439/5e5f8b2b-62b8-430d-b4b4-8f5e280621e6)
@@ -385,6 +431,7 @@ print(f"{decrypt = }")
 ### CFB (Cipher feedback)
  - AES CFB (Advanced Encryption Standard Cipher Feedback) là một chế độ hoạt động của thuật toán mã hóa AES (Advanced Encryption Standard). Đây là chế độ mã hóa mà ciphertext của lần mã hóa hiện tại sẽ được phản hồi (feedback) đến đầu vào của lần mã hóa tiếp theo. Nghĩa là, ciphertext của lần mã hóa hiện tại sẽ được sử dụng để tính toán ciphertext của lần mã hóa kế tiếp. Mô tả có vẻ giống CBC nhưng quá trình trực hiện lại khác.
  - Mã hóa CFB:
+ 
   ![image](https://github.com/luongdv35/SYMMETRIC_CRYPTOGRAPHY_AND_SYMMETRIC_CIPHERS_CRYPTOHACK/assets/127461439/0fa114da-6cd1-4510-905b-9691015f6d54)
 
 
@@ -408,6 +455,7 @@ print(f"{decrypt = }")
     - Lỗi bit bị lan truyền. Nếu một lỗi bit xuất hiện trên ciphertext của một khối dữ liệu thì nó sẽ làm sai kết quả giải mã của khối đữ liệu đó và khối dữ liệu tiếp theo.
     - Không thể thực thi quá trình mã hóa song song vì xử lý của khối dữ liệu sau phụ thuộc vào ciphertext của khối dữ liệu trước, trừ lần mã hóa đầu tiên
  - Dưới đây là mô hình mã hóa và giải mã AES-CFB
+
 ![image](https://github.com/luongdv35/SYMMETRIC_CRYPTOGRAPHY_AND_SYMMETRIC_CIPHERS_CRYPTOHACK/assets/127461439/3f397dfd-7ed3-416a-aebe-dbc297ad852f)
 
 ![image](https://github.com/luongdv35/SYMMETRIC_CRYPTOGRAPHY_AND_SYMMETRIC_CIPHERS_CRYPTOHACK/assets/127461439/1a08c72e-e538-4fde-91c6-5913cdbf4eea)
@@ -481,6 +529,7 @@ print(f"{decrypt = }")
  - Nhược điểm:
     - Không thể thực hiện mã hóa/giải mã song song nhiều khối dữ liệu vì lần mã hóa/giải mã sau phụ thuộc vào khối ngõ ra của lần mã hóa/giải mã liền trước nó.
  - Dưới đây là mô hình mã hóa và giải mã AES-OFB
+
 ![image](https://github.com/luongdv35/SYMMETRIC_CRYPTOGRAPHY_AND_SYMMETRIC_CIPHERS_CRYPTOHACK/assets/127461439/70f5a762-3e9f-4321-93fa-7cdaccc5ca04)
 
 ![image](https://github.com/luongdv35/SYMMETRIC_CRYPTOGRAPHY_AND_SYMMETRIC_CIPHERS_CRYPTOHACK/assets/127461439/4a15a056-06c8-461d-9a09-b4365fda1932)
@@ -529,6 +578,7 @@ print(f"{decrypt = }")
     - Có thể mã hóa/giải mã song song nhiều khối dữ liệu.
  - Nhược điểm: Phần cứng cần thiết kế thêm các bộ đếm counter hoặc giải thuật tạo các giá trị counter không lặp lại. 
  - Dưới đây là mô hình mã hóa và giải mã AES-CTR
+
 ![image](https://github.com/luongdv35/SYMMETRIC_CRYPTOGRAPHY_AND_SYMMETRIC_CIPHERS_CRYPTOHACK/assets/127461439/1463f732-8c10-4de3-a3ad-fe92eaed3cb8)
 
 ![image](https://github.com/luongdv35/SYMMETRIC_CRYPTOGRAPHY_AND_SYMMETRIC_CIPHERS_CRYPTOHACK/assets/127461439/063adca2-6d24-4b58-86ff-2f40c1a47381)
@@ -565,15 +615,18 @@ print(f"{decrypt = }")
 ### GCM (Galois/Counter Mode)
  - AES-GCM (Advanced Encryption Standard - Galois/Counter Mode) là một thuật toán mã hóa đối xứng được sử dụng để bảo vệ tính toàn vẹn và bảo mật dữ liệu trong giao tiếp trực tuyến, bao gồm các ứng dụng như TLS (Transport Layer Security) và VPN (Virtual Private Network). AES là thuật toán mã hóa đối xứng được sử dụng để mã hóa dữ liệu, trong khi GCM là một chế độ hoạt động (mode of operation) được sử dụng để bảo vệ tính toàn vẹn dữ liệu và xác thực nguồn gốc dữ liệu
  - Trong quá trình mã hóa, AES-GCM sử dụng một khóa đối xứng cùng với một nonce (number used once) và một bộ đếm (counter) để tạo ra một bản mã (ciphertext). Sau đó, GCM sử dụng một thủ tục kiểm tra tính toàn vẹn và xác thực nguồn gốc (authentication) để đảm bảo rằng dữ liệu không bị thay đổi hoặc tấn công trung gian trong quá trình truyền tải.
+
 ![image](https://github.com/luongdv35/SYMMETRIC_CRYPTOGRAPHY_AND_SYMMETRIC_CIPHERS_CRYPTOHACK/assets/127461439/6f176404-8659-4363-ab1d-5503959d40e4)
 
  - Hàm GHASH sử dụng trong GCM nhằm cung cấp tính xác thực cho dữ liệu 
 bảo mật. Hàm GHASH được xây dựng bởi các phép nhân trong trường GF(2128) 
 với khóa con băm (H) theo công thức: 
+
 ![image](https://github.com/luongdv35/SYMMETRIC_CRYPTOGRAPHY_AND_SYMMETRIC_CIPHERS_CRYPTOHACK/assets/127461439/0a0c5215-337a-4129-8c32-ba6692d5f568)
 
 trong đó, X1 ÷ Xn là các khối đầu vào 128-bit. 
  - Mặc dù việc lựa chọn tham số q (số nhánh nhân-cộng song song) không bị giới hạn nhưng để đạt được số chu kỳ đồng hồ là nhỏ và thông lượng cao thì sử dụng $q\text{}$ = $2^j\text{}$, 1 < j < [$log_2(n)\text{}$]. Đầu ra hàm GHASH(X,H) nhận được:
+
 ![image](https://github.com/luongdv35/SYMMETRIC_CRYPTOGRAPHY_AND_SYMMETRIC_CIPHERS_CRYPTOHACK/assets/127461439/45cfa8b4-916b-44c2-afc0-f409b7d69343)
 
  - Trong đó, tất cả các toán hạng được thực hiện trong trường GF(2128), với đa thức : 
@@ -585,20 +638,24 @@ trong đó, X1 ÷ Xn là các khối đầu vào 128-bit.
 
  - Theo (2), ta xét các trường hợp: 
      - $q = 8\text{}$ (8 nhánh nhân - cộng song song)
-        ![image](https://github.com/luongdv35/SYMMETRIC_CRYPTOGRAPHY_AND_SYMMETRIC_CIPHERS_CRYPTOHACK/assets/127461439/f312d224-d7d3-4f51-abf7-88ce16e69fec)
+
+       ![image](https://github.com/luongdv35/SYMMETRIC_CRYPTOGRAPHY_AND_SYMMETRIC_CIPHERS_CRYPTOHACK/assets/127461439/f312d224-d7d3-4f51-abf7-88ce16e69fec)
 
      trong đó (a1, a2, a3) là biểu diễn nhị phân của q - i + 1,  1 < i < 8
      - $q = 4\text{}$ (4 nhánh nhân - cộng song song)
-          ![image](https://github.com/luongdv35/SYMMETRIC_CRYPTOGRAPHY_AND_SYMMETRIC_CIPHERS_CRYPTOHACK/assets/127461439/d6a5559d-f214-4c5c-963e-74546cda6514)
+
+        ![image](https://github.com/luongdv35/SYMMETRIC_CRYPTOGRAPHY_AND_SYMMETRIC_CIPHERS_CRYPTOHACK/assets/127461439/d6a5559d-f214-4c5c-963e-74546cda6514)
 
      - $q = 2\text{}$ (2 nhánh nhân - cộng song song)
-         ![image](https://github.com/luongdv35/SYMMETRIC_CRYPTOGRAPHY_AND_SYMMETRIC_CIPHERS_CRYPTOHACK/assets/127461439/fb51f315-424c-424d-a32f-28805bf1c923)
+
+       ![image](https://github.com/luongdv35/SYMMETRIC_CRYPTOGRAPHY_AND_SYMMETRIC_CIPHERS_CRYPTOHACK/assets/127461439/fb51f315-424c-424d-a32f-28805bf1c923)
 
 
 ## Meet in the middle Attack with 2DES
  - “Meet-in-the-middle” là một kỹ thuật tấn công được sử dụng để giảm đáng kể số lượng khóa có thể phải thử khi tấn công một hệ mã hóa. Đây là một phương pháp tấn công hiệu quả đối với các hệ mã hóa sử dụng khối mã hóa với khóa ngắn.
  - Double DES:
      - Double DES là một kỹ thuật mã hóa sử dụng hai phiên bản DES trên cùng một plaintext. Trong cả hai trường hợp, nó sử dụng các khóa khác nhau để mã hóa plaintext. Cả hai khóa đều được yêu cầu tại thời điểm giải mã.Plaintext 64 bit đi vào phiên bản DES đầu tiên, sau đó được chuyển đổi thành văn bản ở giữa 64 bit bằng khóa đầu tiên và sau đó chuyển sang phiên bản DES thứ hai cung cấp ciphertext 64 bit bằng cách sử dụng khóa thứ hai.
+
 ![image](https://github.com/luongdv35/SYMMETRIC_CRYPTOGRAPHY_AND_SYMMETRIC_CIPHERS_CRYPTOHACK/assets/127461439/cd9c3912-3381-4cfd-b8a8-0a999b9a2ab9)
 
      - Mỗi khóa K có độ dài 56 bit, tổng lại Double DES sử dụng khóa 112 bit nhưng mức bảo mật lại là $2^{56}\text{}$ chứ không phải $2^{112}\text{}$, và dễ bị tấn công bở meet-in-the-middle.
@@ -817,13 +874,18 @@ def send_msg(ciphertext, m0, c0):
         return {"error": "Can't decrypt the message."}
 ```
  - Sơ đồ mã hóa
-  ![image](https://hackmd.io/_uploads/HJbbbhvYa.png)
+ 
+  ![image](https://github.com/luongdv35/luongdv35.github.io/assets/127461439/c5d96f35-4f9f-4548-8353-d16deef1dcab)
+
  - Với bài này dùng 2 IV, tôi có sơ đồ giải mã:
-  ![IGE_encryption1](https://hackmd.io/_uploads/ryBQLnPtT.png)
+
+  ![image](https://github.com/luongdv35/luongdv35.github.io/assets/127461439/f2754cfd-256d-4569-8635-7dce4c881c83)
+
  - Khi tôi ``encrypt_flag()`` thì server trả về ``m0, c0, c1`` từ đó dựa vào sơ đồ trên tôi bắt đầu với block đầu tiên với kiểu tấn công padding oracle mà tôi có đề cập ở trên.
  - Việc gửi M0 đối với block1 và pt1 sau khi tìm được đối với sơ đồ giải mã là giữ nguyên.
  - Ta chỉ quan tâm tới C0 và C1 để tấn công theo padding oracle.
-![image](https://hackmd.io/_uploads/BJ6rkpota.png)
+
+![image](https://github.com/luongdv35/luongdv35.github.io/assets/127461439/429f45d8-b324-4a71-a133-1c148d4e09df)
 
  - Nếu khi ta gửi dữ liệu vào nếu mà xuất hiện chuỗi ``Message received`` tức là khi đó phần đệm của ``c0`` đã chính xác và ta chỉ cần tìm lại 
 ```
@@ -884,7 +946,8 @@ print("flag: " , pt1 + pt2 )
 ```
 > FLAG : crypto{h3ll0_t3l3gr4m}
 ## Key-Recovery Attacks on GCM with Repeated Nonces
-![image](https://hackmd.io/_uploads/rkfUnFTYT.png)
+
+![image](https://github.com/luongdv35/luongdv35.github.io/assets/127461439/240aea2e-c967-4208-bf8d-ee5c001c4187)
 
  - Các bạn có thể đọc thêm tại [475.pdf](https://eprint.iacr.org/2016/475.pdf) and [here](http://blog.redrocket.club/2018/03/27/VolgaCTF-Forbidden/)
  - Giả sử $g(X)\text{}$ là hàm $GHASH\text{}$
