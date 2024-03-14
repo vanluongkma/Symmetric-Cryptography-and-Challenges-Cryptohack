@@ -658,10 +658,10 @@ print(f"{decrypt = }")
 
 
  - Hàm GHASH sử dụng trong GCM nhằm cung cấp tính xác thực cho dữ liệu 
-bảo mật. Hàm GHASH được xây dựng bởi các phép nhân trong trường $GF(2^128)$
+bảo mật. Hàm GHASH được xây dựng bởi các phép nhân trong trường $GF(2^{128})$
 với khóa con băm (H) theo công thức: 
 
-![image](https://github.com/vanluongkma/SYMMETRIC_CRYPTOGRAPHY_AND_SYMMETRIC_CIPHERS_CRYPTOHACK/assets/127461439/570361e3-7fdd-40b8-95bb-28b8622f30f0)
+![image](https://github.com/vanluongkma/SYMMETRIC_CRYPTOGRAPHY_AND_SYMMETRIC_CIPHERS_CRYPTOHACK/assets/127461439/f2dbe104-cead-449f-a32c-6196d4fc8045)
 
 
 
@@ -1002,19 +1002,16 @@ print("flag: " , pt1 + pt2 )
 
  - Các bạn có thể đọc thêm tại [475.pdf](https://eprint.iacr.org/2016/475.pdf) and [here](http://blog.redrocket.club/2018/03/27/VolgaCTF-Forbidden/)
  - Giả sử $g(X)\text{}$ là hàm $GHASH\text{}$
-    -  $$g(X) = A_1X^{m+n+1}+\dots+A_mX^{n+2}+C_1X^{n+1}+\dots+C_nX^2+LX+S$$
+      $$g(X) = A_1X^{m+n+1}+\dots+A_mX^{n+2}+C_1X^{n+1}+\dots+C_nX^2+LX+S$$
  - Xét tag $T\text{}$ có thể tính bằng:
-    -  $$g(H) = T $$
+      $$g(H) = T $$
  - Giả sử $A_i, C_i\text{}$ là data blocks và ciphertext blocks, $L\text{}$ biểu thị độ dài message và $S\text{}$ là nonce value. Đều là các block 128bit trong trường hữu hạn $GF(2^{128})\text{}$
-    -  $$f_1(X) \ = \ A_{1,1}X^5 \ + \ C_{1,1}X^4 \ + \ C_{1,2}X^3 \ + \ C_{1,3}X^2 \ + \  LX + S$$
-    -  $$f_2(X) \ = \ A_{2,1}X^5 \ + \ C_{2,1}X^4 \ + \ C_{2,2}X^3 \ + \ C_{2,3}X^2 \ + \ + LX + S$$
+      $$f_1(X) \ = \ A_{1,1}X^5 \ + \ C_{1,1}X^4 \ + \ C_{1,2}X^3 \ + \ C_{1,3}X^2 \ + \  LX + S$$ $$f_2(X) \ = \ A_{2,1}X^5 \ + \ C_{2,1}X^4 \ + \ C_{2,2}X^3 \ + \ C_{2,3}X^2 \ + \ + LX + S$$
   - $S\text{}$ giống nhau vì cùng nonce
   - Thay $H\text{}$(key hash) sẽ cung cấp cho ta authentication tag $f_1(H) = T_1\text{}$ :
-    -  $$f_1'(X) \ = \ A_{1,1}X^5 \ + \ C_{1,1}X^4 \ + \ C_{1,2}X^3 \ + \ C_{1,3}X^2 \ + \ LX \ + \  S \ + \ T_1$$
-   -   $$f_2'(X) \ = \ A_{2,1}X^5 \ + \ C_{2,1}X^4 \ + \ C_{2,2}X^3 \ + \ C_{2,3}X^2 \ + \ LX \ + \ S \ + \ T_2$$
+      $$f_1'(X) \ = \ A_{1,1}X^5 \ + \ C_{1,1}X^4 \ + \ C_{1,2}X^3 \ + \ C_{1,3}X^2 \ + \ LX \ + \  S \ + \ T_1$$   $$f_2'(X) \ = \ A_{2,1}X^5 \ + \ C_{2,1}X^4 \ + \ C_{2,2}X^3 \ + \ C_{2,3}X^2 \ + \ LX \ + \ S \ + \ T_2$$
  - Cộng hai đa thức ở trên ta có
-  -  $$g(X) = f_1'(X) \ + \ f_2'(X)$$
-  -  $$g(X) = (A_{1,1} \ + \ A_{2,1})X^5 \ + \ (C_{1,1} \ + \ C_{2,1})X^4 \ + \ ...  \ + \ LX \ + \ T1 \ + \ T2 $$
+     $$g(X) = f_1'(X) \ + \ f_2'(X)$$  $$g(X) = (A_{1,1} \ + \ A_{2,1})X^5 \ + \ (C_{1,1} \ + \ C_{2,1})X^4 \ + \ ...  \ + \ LX \ + \ T1 \ + \ T2 $$
  - $X$(H(hash key)) sẽ nằm trong các nghiệm của đa thức $g(X)$, trong $GF(2^{128})\text{}$  việc thêm các hệ số cũng giống như XOR các khối tương ứng của chúng.
  - Từ đó tính được $S$ từ $X$(H(hash key)) với
    $$S =  f_1'(H) \ + \ A_{1,1}H^5 \ + \ C_{1,1}H^4 \ + \ C_{1,2}H^3 \ + \ C_{1,3}H^2 \ + \ LH \ + \ T_1$$
@@ -1075,23 +1072,15 @@ def encrypt(plaintext):
     }
 ```
  - .
-     - $$TAG = (((((((((((H * AD0) + AD1) * H) + c0) * H) + c1) * H) + c2) * H) + L) * H) + S$$
-     - $$TAG = AD0 * H^6 + AD1 * H^5 + c0 * H^4 + c1 * H^3 + c2 * H^2 + L * H + S$$
+      $$TAG = (((((((((((H * AD0) + AD1) * H) + c0) * H) + c1) * H) + c2) * H) + L) * H) + S$$ $$TAG = AD0 * H^6 + AD1 * H^5 + c0 * H^4 + c1 * H^3 + c2 * H^2 + L * H + S$$
  - Với bài này ta sẽ nhập 2 block và thu được:
-     - $$TAG = (((((H * c0) + c1) * H) + L) * H + S)$$
- 
-   
-     - $$TAG = c0 * H^3 + c1 * H^2 + L * H + S$$
+      $$TAG = (((((H * c0) + c1) * H) + L) * H + S)$$ $$TAG = c0 * H^3 + c1 * H^2 + L * H + S$$
  - Ta có:
-     -  $$TAG_1 = A * H^3 + c1 * H^2 + L * H + S$$
-     -  $$TAG_2 = A * H^3 + c2 * H^2 + L * H + S$$
-     -  $$TAG_1 - TAG_2 = (c1-c2) * H^2$$
-     -  $$TAG_1 - c1 * H^2 = TAG_2 - c2 * H^2$$
+    $$TAG_1 = A * H^3 + c1 * H^2 + L * H + S$$ $$TAG_2 = A * H^3 + c2 * H^2 + L * H + S$$ $$TAG_1 - TAG_2 = (c1-c2) * H^2$$ $$TAG_1 - c1 * H^2 = TAG_2 - c2 * H^2$$
  - Gọi X là TAG giả mạo. Khi đó ta tính được
-     - $$X = TAG_1 - c1 * H^2 == TAG_2 - c2 * H^2$$
+      $$X = TAG_1 - c1 * H^2 == TAG_2 - c2 * H^2$$
  - Khi có được X rồi ta tính 
-     - $$forge(tag) = c * H^2 + tag1 - c1 * H^2 $$
-     - $$forge(tag) = c * H^2 + X $$
+      $$forge(tag) = c * H^2 + tag1 - c1 * H^2 $$ $$forge(tag) = c * H^2 + X $$
  - Bây giờ ta chỉ cần gửi nonce, ciphertext, forge(tag), AD("Cryptohack") vào server và get flag.
 ```python3
 from Crypto.Util.number import *
